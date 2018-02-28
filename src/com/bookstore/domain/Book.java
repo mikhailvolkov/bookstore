@@ -40,4 +40,28 @@ public class Book {
     public int getPrice() {
         return price;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setNumberOfPages(int numberOfPages) {
+        this.numberOfPages = numberOfPages;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 }
