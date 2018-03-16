@@ -1,11 +1,11 @@
-package com.bookstore.service;
+package com.bookstore.dao;
 
-import com.bookstore.dao.BookField;
 import com.bookstore.domain.Book;
 
 import java.util.List;
 
-public interface BookService {
+public interface BookDao {
+
     void insert(String name, int numberOfPages, String author, double rating, int price);
 
     void update(String id, List<BookField> fieldsToUpdate);

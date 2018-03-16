@@ -1,14 +1,14 @@
 package com.bookstore.domain;
 
 public class Book {
-    private int id;
+    private String id;
     private String name;
     private int numberOfPages;
     private String author;
     private double rating;
     private int price;
 
-    public Book(int id, String name, int numberOfPages, String author, double rating, int price) {
+    public Book(String id, String name, int numberOfPages, String author, double rating, int price) {
         this.id = id;
         this.name = name;
         this.numberOfPages = numberOfPages;
@@ -17,7 +17,7 @@ public class Book {
         this.price = price;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -41,7 +41,7 @@ public class Book {
         return price;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

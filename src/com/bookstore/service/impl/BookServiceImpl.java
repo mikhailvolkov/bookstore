@@ -1,32 +1,36 @@
 package com.bookstore.service.impl;
 
-import com.bookstore.dao.BookDAO;
+import com.bookstore.dao.BookDao;
+import com.bookstore.dao.BookField;
+import com.bookstore.domain.Book;
 import com.bookstore.service.BookService;
 
+import java.util.List;
+
 public class BookServiceImpl implements BookService {
-    private BookDAO bookDAO;
+    private BookDao bookDao;
 
-    public BookServiceImpl(BookDAO bookDAO) {
-        this.bookDAO = bookDAO;
+    public BookServiceImpl(BookDao bookDao) {
+        this.bookDao = bookDao;
     }
 
     @Override
-    public void insert(String name, String author, double cost, int numberOfPages, double rate) {
-        bookDAO.insert(name, author, cost, numberOfPages, rate);
+    public void insert(String name, int numberOfPages, String author, double rating, int price) {
+        bookDao.insert(name, numberOfPages, author, rating, price);
     }
 
     @Override
-    public void update(int id) {
-        bookDAO.update(id);
+    public void update(String id, List<BookField> fieldsToUpdate) {
+        bookDao.update(id, fieldsToUpdate);
     }
 
     @Override
-    public void delete(int id) {
-        bookDAO.delete(id);
+    public void delete(String id) {
+        bookDao.delete(id);
     }
 
     @Override
-    public void getAllBooks() {
-        bookDAO.getAllBooks();
+    public List<Book> getAllBooks() {
+        return bookDao.getAllBooks();
     }
 }
