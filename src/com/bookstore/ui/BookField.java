@@ -1,11 +1,8 @@
-package com.bookstore.dao;
+package com.bookstore.ui;
 
-/*
-Класс для обновления полей в book
- */
 public class BookField {
-    private final String fieldName;//название поля которое хотим обновить
-    private final String fieldValue;//новое значение
+    private String fieldName;
+    private String fieldValue;
 
     public BookField(String fieldName, String fieldValue) {
         this.fieldName = fieldName;

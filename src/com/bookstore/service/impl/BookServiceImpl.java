@@ -1,7 +1,6 @@
 package com.bookstore.service.impl;
 
 import com.bookstore.dao.BookDao;
-import com.bookstore.dao.BookField;
 import com.bookstore.domain.Book;
 import com.bookstore.service.BookService;
 
@@ -15,18 +14,18 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void insert(String name, int numberOfPages, String author, double rating, int price) {
-        bookDao.insert(name, numberOfPages, author, rating, price);
+    public void insert(Book book) {
+        bookDao.insert(book);
     }
 
     @Override
-    public void update(String id, List<BookField> fieldsToUpdate) {
-        bookDao.update(id, fieldsToUpdate);
+    public void update(Book book) {
+        bookDao.update(book);
     }
 
     @Override
-    public void delete(String id) {
-        bookDao.delete(id);
+    public void delete(Book book) {
+        bookDao.delete(book);
     }
 
     @Override

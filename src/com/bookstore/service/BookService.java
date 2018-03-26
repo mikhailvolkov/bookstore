@@ -1,16 +1,15 @@
 package com.bookstore.service;
 
-import com.bookstore.dao.BookField;
 import com.bookstore.domain.Book;
 
 import java.util.List;
 
 public interface BookService {
-    void insert(String name, int numberOfPages, String author, double rating, int price);
+    void insert(Book book);
 
-    void update(String id, List<BookField> fieldsToUpdate);
+    void update(Book book);
 
-    void delete(String id);
+    void delete(Book book);
 
     List<Book> getAllBooks();
 }
