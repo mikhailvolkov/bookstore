@@ -4,7 +4,9 @@ import com.bookstore.domain.Book;
 import com.bookstore.service.BookService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ConsoleUi extends AbstractState {
 
@@ -62,35 +64,43 @@ public class ConsoleUi extends AbstractState {
         System.out.println("Книга удалена!");
     }
 
-    protected void updateBook() {
+    public void updateBook() {
         String id = readStringInput("Введите id книги: ");
         Book book = bookService.getAllBooks().stream().filter(res -> res.getId().equals(id)).findFirst().get();
-        String fields = readStringInput("Введите через запятую название полей которые нужно обновить(name, numberOfPages, author, rating, price) ");
+        System.out.println("Введите через запятую номера полей которые нужно обновить:\n");
+        String fields = readStringInput("1) Название \n" +
+                "2) Количество страниц \n" +
+                "3) Автор \n" +
+                "4) Рейтинг \n" +
+                "5) Цена\n");
         String[] fieldsMas = fields.split(",");
-        String values = readStringInput("Введите через запятую новые значения полей ");
-        String[] valuesMas = fields.split(",");
-        List<BookField> fieldsToUpdate = new ArrayList<>();
-        updateFields(book, fieldsMas, valuesMas);
-
+        String values = readStringInput("Введите через запятую новые значения полей: \n ");
+        String[] valuesMas = values.split(",");
+        Map<Integer, String> valuesMap = new HashMap<>();
+        for (int i = 0; i < fieldsMas.length; i++) {
+            valuesMap.put(Integer.parseInt(fieldsMas[i]), valuesMas[i]);
+        }
+        updateFields(book, valuesMap);
+        System.out.println("Книга обновлена!");
     }
 
-    private void updateFields(Book book, String[] fields, String[] values) {
-        for (int i = 0; i < fields.length; i++) {
-            switch (fields[i]) {
-                case "name":
-                    book.setName(values[i]);
+    private void updateFields(Book book, Map<Integer, String> fields) {
+        for (Integer key : fields.keySet()) {
+            switch (key) {
+                case 1:
+                    book.setName(fields.get(key));
                     break;
-                case "numberOfPages":
-                    book.setNumberOfPages(Integer.parseInt(values[i]));
+                case 2:
+                    book.setNumberOfPages(Integer.parseInt(fields.get(key)));
                     break;
-                case "author":
-                    book.setAuthor(values[i]);
+                case 3:
+                    book.setAuthor(fields.get(key));
                     break;
-                case "rating":
-                    book.setRating(Double.parseDouble(values[i]));
+                case 4:
+                    book.setRating(Double.parseDouble(fields.get(key)));
                     break;
-                case "price":
-                    book.setPrice(Integer.parseInt(values[i]));
+                case 5:
+                    book.setPrice(Integer.parseInt(fields.get(key)));
                     break;
             }
         }
@@ -99,9 +109,12 @@ public class ConsoleUi extends AbstractState {
     private void printAllBooks() {
         bookService.getAllBooks().forEach(elt -> {
             System.out.println("id: " + elt.getId() + "\n" +
-                    "название: " + elt.getName() + "\n" +
+                    "название: " + elt.getName() + "\n"+
+                    "количество страниц: " + elt.getPrice() + "\n"+
                     "автор: " + elt.getAuthor() + "\n" +
-                    "стоимость: " + elt.getPrice() + "\n");
+                    "рейтинг: " + elt.getRating() + "\n" +
+                    "стоимость: " + elt.getPrice() + "\n"
+            );
         });
     }
 

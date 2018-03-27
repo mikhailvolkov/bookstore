@@ -1,7 +1,5 @@
 package com.bookstore.ui;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.function.Function;
 public abstract class AbstractState {
@@ -38,7 +36,7 @@ public abstract class AbstractState {
             try {
                 input = convertFunction.apply(str);
             } catch (Exception e) {
-                System.err.println("Failed to convert: " + e.getMessage());
+                System.err.println("Ошибка конвертации: " + e.getMessage());
                 input = null;
             }
         } while (input == null);
@@ -46,21 +44,21 @@ public abstract class AbstractState {
     }
 
     protected int readIntInput(String prefix) {
-        return readInput(prefix, s -> Integer.parseInt(s));
+        return readInput(prefix, s -> Integer.parseInt(s.trim()));
     }
 
     protected int readIntInput(final String prefix, final int max) {
         return readInput(prefix, s -> {
             int i = Integer.parseInt(s);
             if (i > max) {
-                throw new IllegalArgumentException("Input can't be more than " + max);
+                throw new IllegalArgumentException("Вводимое значение не может быть больше " + max);
             }
             return i;
         });
     }
 
     protected double readDoubleInput(String prefix) {
-        return readInput(prefix, s -> Double.parseDouble(s));
+        return readInput(prefix, s -> Double.parseDouble(s.trim()));
     }
 
     protected abstract int printMainActions();
