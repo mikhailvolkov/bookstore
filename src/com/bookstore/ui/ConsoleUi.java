@@ -1,14 +1,13 @@
 package com.bookstore.ui;
 
 import com.bookstore.domain.Book;
+import com.bookstore.exceptions.BookNotFoundException;
 import com.bookstore.service.BookService;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class ConsoleUi extends AbstractState {
+public class ConsoleUi extends AbstractСonsoleUi {
 
     private BookService bookService;
 
@@ -44,7 +43,7 @@ public class ConsoleUi extends AbstractState {
     }
 
 
-    public void createBook() {
+    private void createBook() {
         String id = readStringInput("Id книги: ");
         String name = readStringInput("Название книги: ");
         int numberOfPages = readIntInput("Количество страниц: ");
@@ -57,16 +56,29 @@ public class ConsoleUi extends AbstractState {
         System.out.println("Книга добавлена!");
     }
 
-    protected void deleteBook() {
+    private void deleteBook() {
         String id = readStringInput("Введите id книги: ");
-        Book book = bookService.getAllBooks().stream().filter(res -> res.getId().equals(id)).findFirst().get();
-        bookService.delete(book);
-        System.out.println("Книга удалена!");
+        Book book = null;
+        try {
+            book = bookService.getBookById(id);
+        } catch (BookNotFoundException ex) {
+            System.out.println("Указанная книга не найдена!");
+        }
+        if (book != null) {
+            bookService.delete(book);
+            System.out.println("Книга обновлена!");
+        }
     }
 
-    public void updateBook() {
+    private void updateBook() {
         String id = readStringInput("Введите id книги: ");
-        Book book = bookService.getAllBooks().stream().filter(res -> res.getId().equals(id)).findFirst().get();
+        Book book = null;
+        try {
+            book = bookService.getBookById(id);
+        } catch (BookNotFoundException ex) {
+            System.out.println("Указанная книга не найдена!");
+            return;
+        }
         System.out.println("Введите через запятую номера полей которые нужно обновить:\n");
         String fields = readStringInput("1) Название \n" +
                 "2) Количество страниц \n" +
@@ -81,8 +93,12 @@ public class ConsoleUi extends AbstractState {
             valuesMap.put(Integer.parseInt(fieldsMas[i]), valuesMas[i]);
         }
         updateFields(book, valuesMap);
-        System.out.println("Книга обновлена!");
+        if (book != null) {
+            bookService.update(book);
+            System.out.println("Книга обновлена!");
+        }
     }
+
 
     private void updateFields(Book book, Map<Integer, String> fields) {
         for (Integer key : fields.keySet()) {

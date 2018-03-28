@@ -13,4 +13,7 @@ public interface BookDao {
     void delete(Book book);
 
     List<Book> getAllBooks();
+
+    Book getBookById(String id);
+
 }

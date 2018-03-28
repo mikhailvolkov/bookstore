@@ -2,7 +2,7 @@ package com.bookstore.ui;
 
 import java.util.Scanner;
 import java.util.function.Function;
-public abstract class AbstractState {
+public abstract class AbstractСonsoleUi {
 
     private static Scanner scanner = new Scanner(System.in, "UTF-8");
 
@@ -19,17 +19,17 @@ public abstract class AbstractState {
         } while (action > 0);
     }
 
-    public void printDelimiter() {
+    private void printDelimiter() {
         System.out.println("--------------------------------------------");
     }
 
-    protected String readStringInput(String prefix) {
+    String readStringInput(String prefix) {
         System.out.print(prefix);
         String line = scanner.nextLine();
         return line;
     }
 
-    protected <R> R readInput(String prefix, Function<String, R> convertFunction) {
+    private <R> R readInput(String prefix, Function<String, R> convertFunction) {
         R input = null;
         do {
             String str = readStringInput(prefix);
@@ -43,11 +43,11 @@ public abstract class AbstractState {
         return input;
     }
 
-    protected int readIntInput(String prefix) {
+    int readIntInput(String prefix) {
         return readInput(prefix, s -> Integer.parseInt(s.trim()));
     }
 
-    protected int readIntInput(final String prefix, final int max) {
+    int readIntInput(final String prefix, final int max) {
         return readInput(prefix, s -> {
             int i = Integer.parseInt(s);
             if (i > max) {
@@ -57,15 +57,15 @@ public abstract class AbstractState {
         });
     }
 
-    protected double readDoubleInput(String prefix) {
+    double readDoubleInput(String prefix) {
         return readInput(prefix, s -> Double.parseDouble(s.trim()));
     }
 
-    protected abstract int printMainActions();
+    abstract int printMainActions();
 
-    protected abstract void runAction(int action);
+    abstract void runAction(int action);
 
-    private int readUserActionInput(int maxInput) {
+    int readUserActionInput(int maxInput) {
         do {
             int action = readIntInput("Введите необходимое действие: ");
             if (action >= 0 && action <= maxInput) {

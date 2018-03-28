@@ -2,6 +2,7 @@ package com.bookstore.service.impl;
 
 import com.bookstore.dao.BookDao;
 import com.bookstore.domain.Book;
+import com.bookstore.exceptions.BookNotFoundException;
 import com.bookstore.service.BookService;
 
 import java.util.List;
@@ -31,5 +32,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> getAllBooks() {
         return bookDao.getAllBooks();
+    }
+
+    @Override
+    public Book getBookById(String id) throws BookNotFoundException {
+       return bookDao.getBookById(id);
+
     }
 }
