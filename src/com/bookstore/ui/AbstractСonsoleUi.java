@@ -6,6 +6,10 @@ public abstract class AbstractСonsoleUi {
 
     private static Scanner scanner = new Scanner(System.in, "UTF-8");
 
+    abstract int printMainActions();
+
+    abstract void runAction(int action);
+
     public void run() {
         int action = 0;
         do {
@@ -60,10 +64,6 @@ public abstract class AbstractСonsoleUi {
     double readDoubleInput(String prefix) {
         return readInput(prefix, s -> Double.parseDouble(s.trim()));
     }
-
-    abstract int printMainActions();
-
-    abstract void runAction(int action);
 
     int readUserActionInput(int maxInput) {
         do {

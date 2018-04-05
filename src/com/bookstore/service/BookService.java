@@ -1,6 +1,8 @@
 package com.bookstore.service;
 
 import com.bookstore.domain.Book;
+import com.bookstore.exceptions.BookNotFoundException;
+
 import java.util.List;
 
 public interface BookService {
@@ -12,5 +14,5 @@ public interface BookService {
 
     List<Book> getAllBooks();
 
-    Book getBookById(String id);
+    Book getBookById(String id) throws BookNotFoundException;
 }

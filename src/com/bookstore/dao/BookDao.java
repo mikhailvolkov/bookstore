@@ -1,6 +1,7 @@
 package com.bookstore.dao;
 
 import com.bookstore.domain.Book;
+import com.bookstore.exceptions.BookNotFoundException;
 
 import java.util.List;
 
@@ -14,6 +15,6 @@ public interface BookDao {
 
     List<Book> getAllBooks();
 
-    Book getBookById(String id);
+    Book getBookById(String id) throws BookNotFoundException;
 
 }
