@@ -1,0 +1,19 @@
+package com.bookstore;
+
+import com.bookstore.dao.impl.BookDaoImpl;
+import com.bookstore.domain.Book;
+import com.bookstore.service.impl.BookServiceImpl;
+import com.bookstore.ui.ConsoleUi;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        List<Book> books = new ArrayList<>();
+        books.add(new Book("12345", "Название",300,"Автор",5.3,500));
+        BookServiceImpl service = new BookServiceImpl(new BookDaoImpl(books));
+        ConsoleUi ui = new ConsoleUi(service);
+        ui.run();
+    }
+}

@@ -1,42 +1,42 @@
-package com.bookstore.service.impl;
+package com.bookstore.dao.impl;
 
 import com.bookstore.dao.BookDao;
 import com.bookstore.domain.Book;
 import com.bookstore.exceptions.BookNotFoundException;
-import com.bookstore.service.BookService;
 
 import java.util.List;
 
-public class BookServiceImpl implements BookService {
-    private BookDao bookDao;
+public class BookDaoImpl implements BookDao {
+    private List<Book> books;
 
-    public BookServiceImpl(BookDao bookDao) {
-        this.bookDao = bookDao;
+
+    public BookDaoImpl(List<Book> books) {
+        this.books = books;
     }
 
     @Override
     public void insert(Book book) {
-        bookDao.insert(book);
+        books.add(book);
     }
 
     @Override
     public void update(Book book) {
-        bookDao.update(book);
+       books.removeIf(elt -> elt.getId().equals(book.getId()));
+       books.add(book);
     }
 
     @Override
     public void delete(Book book) {
-        bookDao.delete(book);
+        books.remove(book);
     }
 
     @Override
     public List<Book> getAllBooks() {
-        return bookDao.getAllBooks();
+        return books;
     }
 
     @Override
     public Book getBookById(String id) throws BookNotFoundException {
-       return bookDao.getBookById(id);
-
+        return getAllBooks().stream().filter(res -> res.getId().equals(id)).findFirst().orElseThrow(BookNotFoundException::new);
     }
 }
