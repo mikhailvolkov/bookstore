@@ -88,6 +88,7 @@ public class BookServiceTest {
     public void checkThatBookSizeDecreaseWhenDeletedOne() {
         // GIVEN
         Book expected = new Book("12345", "Новое название", 300, "Новый автор", 5.3, 500);
+        bookService.insert(expected);
 
         // WHEN
         when(bookDao.getAllBooks()).thenReturn(Collections.emptyList());
