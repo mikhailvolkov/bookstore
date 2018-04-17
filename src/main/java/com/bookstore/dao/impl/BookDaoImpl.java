@@ -15,14 +15,16 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public void insert(Book book) {
+    public Book insert(Book book) {
         books.add(book);
+        return book;
     }
 
     @Override
-    public void update(Book book) {
+    public Book update(Book book) {
        books.removeIf(elt -> elt.getId().equals(book.getId()));
        books.add(book);
+       return book;
     }
 
     @Override
