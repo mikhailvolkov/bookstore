@@ -5,7 +5,6 @@ import com.bookstore.dao.impl.BookDaoImpl;
 import com.bookstore.domain.Book;
 import com.bookstore.exceptions.BookNotFoundException;
 import com.bookstore.service.impl.BookServiceImpl;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -13,18 +12,10 @@ import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doAnswer;
+
 import static org.mockito.Mockito.when;
 
 
@@ -57,20 +48,6 @@ public class BookServiceTest {
         assertEquals(expected, insertedBook);
     }
 
-
-    @Test
-    public void checkThatBooksSizeIncreaseByOneWhenInsertNewOne() {
-        // GIVEN
-        Book expected = new Book("12345", "Название", 300, "Автор", 5.3, 500);
-
-        // WHEN
-        when(bookDao.getAllBooks()).thenReturn(Collections.singletonList(expected));
-        bookService.insert(expected);
-
-        // THEN
-        assertEquals(bookService.getAllBooks().size(), 1);
-    }
-
     @Test
     public void checkThatReturnsTheSameBookWhenUpdate() {
         // GIVEN
@@ -85,17 +62,17 @@ public class BookServiceTest {
     }
 
     @Test
-    public void checkThatBookSizeDecreaseWhenDeletedOne() {
-        // GIVEN
-        Book expected = new Book("12345", "Новое название", 300, "Новый автор", 5.3, 500);
-        bookService.insert(expected);
+    public void checkInsertWhenBookIsNull() {
+        when(bookDao.insert(null)).thenReturn(null);
 
-        // WHEN
-        when(bookDao.getAllBooks()).thenReturn(Collections.emptyList());
-        bookService.delete(expected);
+        assertNull(bookService.insert(null));
+    }
 
-        // THEN
-        assertEquals(bookService.getAllBooks().size(), 0);
+    @Test
+    public void checkUpdateWhenBookIsNull() {
+        when(bookDao.update(null)).thenReturn(null);
+
+        assertNull(bookService.update(null));
     }
 
 }

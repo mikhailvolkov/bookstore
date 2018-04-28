@@ -48,6 +48,9 @@ public abstract class AbstractСonsoleUi {
     }
 
     int readIntInput(String prefix) {
+        if (prefix == null) {
+            return 0;
+        }
         return readInput(prefix, s -> Integer.parseInt(s.trim()));
     }
 
@@ -62,6 +65,9 @@ public abstract class AbstractСonsoleUi {
     }
 
     double readDoubleInput(String prefix) {
+        if (prefix == null) {
+            return 0;
+        }
         return readInput(prefix, s -> Double.parseDouble(s.trim()));
     }
 
