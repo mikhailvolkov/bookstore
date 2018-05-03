@@ -62,14 +62,14 @@ public class BookServiceTest {
     }
 
     @Test
-    public void checkInsertWhenBookIsNull() {
+    public void checkThatInsertReturnsNullWhenBookIsNull() {
         when(bookDao.insert(null)).thenReturn(null);
 
         assertNull(bookService.insert(null));
     }
 
     @Test
-    public void checkUpdateWhenBookIsNull() {
+    public void checkThatUpdateReturnsNullWhenBookIsNull() {
         when(bookDao.update(null)).thenReturn(null);
 
         assertNull(bookService.update(null));

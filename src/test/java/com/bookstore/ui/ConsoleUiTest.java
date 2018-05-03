@@ -18,13 +18,13 @@ public class ConsoleUiTest {
     private ConsoleUi ui;
 
     @Test
-    public void checkWhenReadIntInputIsNull() {
+    public void checkThatReadIntInputReturnsZeroWhenStringIsNull() {
         assertEquals(0, ui.readIntInput(null));
 
     }
 
     @Test
-    public void checkWhenReadDoubleInputIsNull() {
+    public void checkThatReadDoubleInputReturnsZeroWhenStringIsNull() {
         assertEquals(0, ui.readDoubleInput(null), 0);
     }
 
