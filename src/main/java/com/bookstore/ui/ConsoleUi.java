@@ -43,7 +43,7 @@ public class ConsoleUi extends AbstractСonsoleUi {
     }
 
 
-    private void createBook() {
+    public Book createBook(){
         String id = readStringInput("Id книги: ");
         String name = readStringInput("Название книги: ");
         int numberOfPages = readIntInput("Количество страниц: ");
@@ -54,9 +54,10 @@ public class ConsoleUi extends AbstractСonsoleUi {
         Book book = new Book(id, name, numberOfPages, author, rating, price);
         bookService.insert(book);
         System.out.println("Книга добавлена!");
+        return book;
     }
 
-    private void deleteBook() {
+    public void deleteBook() {
         String id = readStringInput("Введите id книги: ");
         Book book = null;
         try {
@@ -70,7 +71,7 @@ public class ConsoleUi extends AbstractСonsoleUi {
         }
     }
 
-    private void updateBook() {
+    public void updateBook() {
         String id = readStringInput("Введите id книги: ");
         Book book = null;
         try {
