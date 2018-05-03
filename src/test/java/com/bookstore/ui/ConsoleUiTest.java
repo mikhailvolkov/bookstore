@@ -12,10 +12,11 @@ import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ConsoleUiTest {
-    @Mock
-    private BookService service;
     @InjectMocks
     private ConsoleUi ui;
+    @Mock
+    private BookService service;
+
 
     @Test
     public void checkThatReadIntInputReturnsZeroWhenStringIsNull() {
